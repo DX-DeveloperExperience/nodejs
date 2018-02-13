@@ -8,13 +8,13 @@
     "format": "prettier --write \"app/**/*.js\""
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
-    "express": "~4.15.5",
-    "morgan": "^1.9.0"
+    "body-parser": "1.18.2",
+    "express": "4.15.5",
+    "morgan": "1.9.0"
   },
   "devDependencies": {
-    "prettier": "^1.10.2",
-    "retire": "^1.5.1"
+    "prettier": "1.10.2",
+    "retire": "1.5.1"
   },
   "prettier": {
     "singleQuote": true
