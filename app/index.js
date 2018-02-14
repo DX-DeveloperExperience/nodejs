@@ -1,15 +1,30 @@
 const express = require('express');
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  transports: []
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple()
+    })
+  );
+}
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-app.use(logger('dev'));
+app.use(require('morgan')('dev'));
+
 app.use(bodyParser.json());
 
-app.get('/', function(req, res, next) {
+app.get('/', (req, res) => {
   res.end('Hello World');
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => logger.info(`Server running on port ${port}`));
