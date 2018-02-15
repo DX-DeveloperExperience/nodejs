@@ -27,4 +27,8 @@ app.get('/', (req, res) => {
   res.end('Hello World');
 });
 
+process.on('unhandledRejection', reason => {
+  logger.log(`Unhandled Rejection at: ${reason.stack || reason}`);
+});
+
 app.listen(port, () => logger.info(`Server running on port ${port}`));
