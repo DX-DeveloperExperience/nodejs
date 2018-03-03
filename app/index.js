@@ -27,8 +27,19 @@ app.get('/', (req, res) => {
   res.end('Hello World');
 });
 
+require('./routes/healthcheck/healthcheck')(app);
+
 process.on('unhandledRejection', reason => {
   logger.log(`Unhandled Rejection at: ${reason.stack || reason}`);
 });
 
-app.listen(port, () => logger.info(`Server running on port ${port}`));
+const server = app.listen(port, () =>
+  logger.info(`Server running on port ${port}`)
+);
+
+process.on('SIGTERM', () => {
+  logger.info('shutdown started');
+  server.close();
+});
+
+module.exports = server;

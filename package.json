@@ -20,8 +20,11 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^4.12.1",
+    "mocha": "^5.0.1",
     "prettier": "1.10.2",
-    "retire": "1.5.1"
+    "retire": "1.5.1",
+    "supertest": "^3.0.0"
   },
   "prettier": {
     "singleQuote": true

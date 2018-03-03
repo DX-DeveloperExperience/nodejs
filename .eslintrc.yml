@@ -1,1 +1,4 @@
 extends: [airbnb-base,prettier]
+plugins: [mocha]
+env:
+  mocha: true
