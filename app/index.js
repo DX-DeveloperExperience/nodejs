@@ -1,5 +1,8 @@
 const express = require('express');
 const winston = require('winston');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load(__dirname + '/swagger.yaml');
 
 const logger = winston.createLogger({
   level: 'info',
@@ -20,10 +23,12 @@ const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 
 app.use(require('morgan')('dev'));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
+  res.type('text/plain');
   res.end('Hello World');
 });
 

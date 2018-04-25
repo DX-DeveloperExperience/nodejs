@@ -1,0 +1,25 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Simple API
+  description: A simple API to learn how to write OpenAPI Specification
+
+schemes:
+  - http
+host: localhost:3000
+basePath: /
+
+paths:
+  /:
+    get:
+      summary: Get Hello World
+      description: Return the 'Hello World' string
+      responses:
+        200:
+          description: Hello World
+          content:
+            text/plain:
+              schema:
+                type: string
+      
