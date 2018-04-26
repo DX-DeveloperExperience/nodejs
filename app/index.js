@@ -22,6 +22,7 @@ const port = process.env.PORT || 3000;
 
 const bodyParser = require('body-parser');
 
+app.disable('x-powered-by');
 app.use(require('morgan')('dev'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
