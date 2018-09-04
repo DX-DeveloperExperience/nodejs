@@ -10,6 +10,8 @@ RUN npm install --production
 
 COPY app ./app
 
+USER node
+
 EXPOSE 8080
 
 CMD [ "npm", "start" ]
