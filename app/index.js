@@ -3,7 +3,11 @@ const winston = require('winston');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
-const swaggerDocument = YAML.load(`${__dirname  }/swagger.yaml`);
+const swaggerDocument = YAML.load(`${__dirname}/swagger.yaml`);
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
 
 const logger = winston.createLogger({
   level: 'info',
