@@ -3,10 +3,8 @@ const winston = require('winston');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
-const swaggerDocument = YAML.load(`${__dirname}/swagger.yaml`);
-
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
+  require('dotenv').load(); // eslint-disable-line global-require
 }
 
 const logger = winston.createLogger({
@@ -30,7 +28,10 @@ const bodyParser = require('body-parser');
 app.disable('x-powered-by');
 app.use(require('morgan')('dev'));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+if (process.env.NODE_ENV === 'production') {
+  const swaggerDocument = YAML.load(`${__dirname}/swagger.yaml`);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
 
 app.use(bodyParser.json());
 

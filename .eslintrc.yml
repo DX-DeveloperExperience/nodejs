@@ -1,4 +1,4 @@
-extends: [airbnb-base,prettier]
-plugins: [mocha]
+extends: [airbnb-base, prettier]
+plugins: [jest]
 env:
-  mocha: true
+  jest: true

@@ -2,7 +2,7 @@ const request = require('supertest');
 const server = require('../../index');
 
 describe('loading express', () => {
-  after(done => {
+  afterAll(done => {
     server.close(done);
   });
   it('responds to /_health/liveness', done => {
