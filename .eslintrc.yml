@@ -1,4 +1,4 @@
-extends: [airbnb-base, prettier]
-plugins: [jest]
+extends: [airbnb-base, prettier, plugin:security/recommended]
+plugins: [jest, security]
 env:
   jest: true
