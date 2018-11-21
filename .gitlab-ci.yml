@@ -1,0 +1,44 @@
+image: node:10-alpine
+
+stages:
+  - lint
+  - test
+  - build
+
+cache:
+  paths:
+    - node_modules/
+
+test:
+  stage: test
+  script:
+    - npm i
+    - npm run test
+
+lint:
+  stage: lint
+  script:
+    - npm i
+    - npm run lint
+
+prettier:
+  stage: lint
+  script:
+    - npm i
+    - npm run prettier-test
+
+build:
+  image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  stage: build
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:latest
+  when: manual
+  only:
+    - master
